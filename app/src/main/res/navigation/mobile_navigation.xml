@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_meds">
+
+    <fragment
+        android:id="@+id/nav_meds"
+        android:name="com.icretu.mymeds.ui.meds.MedsFragment"
+        android:label="@string/menu_meds"
+        tools:layout="@layout/fragment_meds">
+        <action
+            android:id="@+id/action_meds_to_affections"
+            app:destination="@id/nav_affections" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_affections"
+        android:name="com.icretu.mymeds.ui.affections.AffectionsFragment"
+        android:label="@string/menu_affections"
+        tools:layout="@layout/fragment_treatment">
+        <action
+            android:id="@+id/action_affections_to_treatment"
+            app:destination="@id/nav_treatment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_treatment"
+        android:name="com.icretu.mymeds.ui.treatment.TreatmentFragment"
+        android:label="@string/menu_treatment"
+        tools:layout="@layout/fragment_affections">
+        <action
+            android:id="@+id/action_treatment_to_meds"
+            app:destination="@id/nav_meds" />
+    </fragment>
+</navigation>

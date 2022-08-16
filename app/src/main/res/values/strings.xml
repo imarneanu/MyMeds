@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name" translatable="false">MyMeds</string>
+    <string name="nav_header_title" translatable="false">MyMeds</string>
+    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
+
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_meds">Medicamente</string>
+    <string name="menu_affections">Simptome</string>
+    <string name="menu_treatment">Tratament</string>
+</resources>
