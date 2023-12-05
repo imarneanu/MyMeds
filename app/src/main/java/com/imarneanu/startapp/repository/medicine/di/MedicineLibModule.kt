@@ -3,7 +3,6 @@ package com.imarneanu.startapp.repository.medicine.di
 import com.imarneanu.startapp.domain.source.MedicineSource
 import com.imarneanu.startapp.domain.source.MedicineSourceImpl
 import com.imarneanu.startapp.domain.usecase.DeleteMedicine
-import com.imarneanu.startapp.domain.usecase.DeleteAllMeds
 import com.imarneanu.startapp.domain.usecase.InsertMedicine
 import com.imarneanu.startapp.domain.usecase.QueryMedicine
 import com.imarneanu.startapp.repository.database.MyMedsDatabase
@@ -21,7 +20,6 @@ val medicineLibModule = module {
     single<MedicineSource> { MedicineSourceImpl(get(), get()) }
 
     single { DeleteMedicine(get()) }
-    single { DeleteAllMeds(get()) }
     single { InsertMedicine(get()) }
     single { QueryMedicine(get()) }
 }

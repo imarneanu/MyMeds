@@ -11,7 +11,5 @@ class MedicineRepositoryImpl(private val medicineDao: MedicineDao) : MedicineRep
 
     override suspend fun deleteMedicine(dbMedicine: DbMedicine) = medicineDao.delete(dbMedicine)
 
-    override suspend fun deleteAll() = medicineDao.deleteAll()
-
     override fun meds(): Flow<List<DbMedicine>> = medicineDao.getAll()
 }

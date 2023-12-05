@@ -10,18 +10,14 @@ class MedicineMapperImpl : MedicineMapper {
     override fun toDbMedicine(medicine: Medicine): DbMedicine = with(medicine) {
         DbMedicine(
             name = name,
-            expirationDate = expirationDate,
             quantity = quantity,
-            quantityLabel = quantityLabel,
         )
     }
 
     private fun toMedicine(dbMedicine: DbMedicine) = with(dbMedicine) {
         Medicine(
             name = name,
-            expirationDate = expirationDate,
             quantity = quantity,
-            quantityLabel = quantityLabel,
         )
     }
 }

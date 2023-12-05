@@ -9,7 +9,5 @@ interface MedicineRepository {
 
     suspend fun deleteMedicine(dbMedicine: DbMedicine)
 
-    suspend fun deleteAll()
-
     fun meds(): Flow<List<DbMedicine>>
 }

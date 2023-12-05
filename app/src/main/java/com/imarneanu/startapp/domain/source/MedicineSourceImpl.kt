@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.map
 
 class MedicineSourceImpl(
     private val medicineRepository: MedicineRepository,
-    private val medicineMapper: MedicineMapper
+    private val medicineMapper: MedicineMapper,
 ) : MedicineSource {
 
     private val meds = medicineRepository.meds().map(medicineMapper::toMeds)
@@ -18,8 +18,6 @@ class MedicineSourceImpl(
 
     override suspend fun deleteMedicine(medicine: Medicine) =
         medicineRepository.deleteMedicine(medicineMapper.toDbMedicine(medicine))
-
-    override suspend fun deleteAll() = medicineRepository.deleteAll()
 
     override fun meds(): Flow<List<Medicine>> = meds
 }

@@ -8,6 +8,7 @@ val medsModule = module {
         MedsViewModel(
             queryMeds = get(),
             insertMedicine = get(),
+            deleteMedicine = get(),
         )
     }
 }

@@ -9,7 +9,5 @@ interface MedicineSource {
 
     suspend fun deleteMedicine(medicine: Medicine)
 
-    suspend fun deleteAll()
-
     fun meds(): Flow<List<Medicine>>
 }
