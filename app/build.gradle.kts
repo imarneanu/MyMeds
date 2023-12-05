@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.imarneanu.startapp"
+    namespace = "com.imarneanu.mymeds"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.imarneanu.startapp"
+        applicationId = "com.imarneanu.mymeds"
         minSdk = 26
         targetSdk = 33
         versionCode = 1
@@ -18,6 +18,12 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
+        }
+
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas")
+            }
         }
     }
 
