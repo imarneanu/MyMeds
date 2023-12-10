@@ -33,31 +33,52 @@ class MedsViewModel(
     fun onEvent(event: MedsEvent) {
         when (event) {
             is MedsEvent.DeleteMedicine -> viewModelScope.launch { deleteMedicine(event.medicine) }
-            MedsEvent.HideDialog -> _state.update { it.copy(isAddingMedicine = false) }
+            MedsEvent.HideDialog -> _state.update { it.copy(showMedicineDialog = false) }
             MedsEvent.SaveMedicine -> {
+                val id = state.value.medicineId
                 val name = state.value.name
                 val quantity = state.value.quantity
+                val expirationDate = state.value.expirationDate
 
                 if (name.isBlank()) return
 
                 val medicine = Medicine(
-                    id = 0,
+                    id = id ?: 0,
                     name = name,
-                    quantity = quantity,
+                    quantity = quantity ?: "1",
+                    expirationDate = expirationDate,
                 )
 
                 viewModelScope.launch { insertMedicine(medicine) }
                 _state.update {
                     it.copy(
-                        isAddingMedicine = false,
+                        showMedicineDialog = false,
                         name = "",
                         quantity = "",
+                        expirationDate = 0,
                     )
                 }
             }
+
             is MedsEvent.SetName -> _state.update { it.copy(name = event.name) }
             is MedsEvent.SetQuantity -> _state.update { it.copy(quantity = event.quantity) }
-            MedsEvent.ShowDialog -> _state.update { it.copy(isAddingMedicine = true) }
+            is MedsEvent.SetExpirationDate -> _state.update {
+                it.copy(
+                    expirationDate = MedsUIMapper.toMilliseconds(
+                        event.expirationDate
+                    )
+                )
+            }
+
+            is MedsEvent.ShowMedicineDialog -> _state.update {
+                it.copy(
+                    showMedicineDialog = true,
+                    medicineId = event.medicine?.id,
+                    name = event.medicine?.name ?: "",
+                    quantity = event.medicine?.quantity,
+                    expirationDate = event.medicine?.expirationDate ?: 0,
+                )
+            }
         }
     }
 }

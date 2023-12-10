@@ -7,6 +7,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -15,6 +16,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -26,13 +28,13 @@ fun MedsScreen(
 ) {
     Scaffold(
         floatingActionButton = {
-            FloatingActionButton(onClick = { onEvent(MedsEvent.ShowDialog) }) {
+            FloatingActionButton(onClick = { onEvent(MedsEvent.ShowMedicineDialog()) }) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add medicine")
             }
         }
     ) { _ ->
-        if (state.isAddingMedicine) {
-            AddMedicationDialog(state = state, onEvent = onEvent)
+        if (state.showMedicineDialog) {
+            ShowMedicationDialog(state = state, onEvent = onEvent)
             return@Scaffold
         }
 
@@ -49,14 +51,25 @@ fun MedsScreen(
                 ) {
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = "${medicine.name} - ${medicine.quantity}",
+                            text = "${medicine.name} - ${medicine.quantity}. ${
+                                medicine.expirationDate.let { MedsUIMapper.toFormatDate(it) }
+                            }",
+                            color = if (medicine.isExpired) Color.Red else Color.Black,
                             fontSize = 20.sp
+                        )
+                    }
+                    IconButton(onClick = { onEvent(MedsEvent.ShowMedicineDialog(medicine)) }) {
+                        Icon(
+                            imageVector = Icons.Default.Edit,
+                            tint = if (medicine.isExpired) Color.Red else Color.Black,
+                            contentDescription = "Edit medicine",
                         )
                     }
                     IconButton(onClick = { onEvent(MedsEvent.DeleteMedicine(medicine)) }) {
                         Icon(
                             imageVector = Icons.Default.Delete,
-                            contentDescription = "Delete medicine"
+                            tint = if (medicine.isExpired) Color.Red else Color.Black,
+                            contentDescription = "Delete medicine",
                         )
                     }
                 }

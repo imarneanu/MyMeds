@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "3c809a3a36d5ab128a48841860edded6",
+    "identityHash": "255d9ea2a83c20e184ed7357d7198a37",
     "entities": [
       {
         "tableName": "Medicine",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `quantity` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `quantity` TEXT NOT NULL, `expirationDate` INTEGER)",
         "fields": [
           {
             "fieldPath": "id",
@@ -24,6 +24,12 @@
             "fieldPath": "quantity",
             "columnName": "quantity",
             "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "expirationDate",
+            "columnName": "expirationDate",
+            "affinity": "INTEGER",
             "notNull": false
           }
         ],
@@ -40,7 +46,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3c809a3a36d5ab128a48841860edded6')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '255d9ea2a83c20e184ed7357d7198a37')"
     ]
   }
 }

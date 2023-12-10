@@ -1,2 +1,2 @@
-# startapp
-Jetcompose, Kotlin, Koin &amp; backbone architexture
+# mymeds
+Jetpack compose, Kotlin, Koin &amp; backbone architecture
